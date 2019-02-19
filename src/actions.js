@@ -1,5 +1,14 @@
-import axios from 'axios'
-import debounce from 'debounce'
+/**
+ * @Author: Jack Woods
+ * @Date:   2019-01-15T09:01:50-08:00
+ * @Email:  jackrwoods@gmail.com
+ * @Filename: actions.js
+ * @Last modified by:   Jack Woods
+ * @Last modified time: 2019-02-19T09:48:30-08:00
+ */
+
+import axios from 'axios' // Library for making API requests
+import debounce from 'debounce' // Library that claims "Useful for implementing behavior that should only happen after a repeated action has completed." -> https://www.npmjs.com/package/debounce
 import {
   ERRORED_CONTRIBUTIONS_FETCH,
   ERRORED_YEAR_FETCH,
@@ -23,18 +32,23 @@ import {
   registerShapewaysExport,
   registerChartDownload } from './analytics'
 
+// Amazon API Gateway url -> https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-deploy-api.html
 const BASE_URL = 'https://xfrua0iqkc.execute-api.us-east-1.amazonaws.com/dev'
 
+// Don't know what this does yet
+// Props: entity
+//        year
 export const loadContributions = (entity, year) => (dispatch, getState) => {
-  dispatch({ type: START_CONTRIBUTION_UPDATE })
+  // Use of dispatch(), getState(), etc point to redux as central data store
+  dispatch({ type: START_CONTRIBUTION_UPDATE }) // Triggers a state change
   registerChartDownload(entity, year)
-  return axios.get(`${BASE_URL}/v1/contributions`, { params: {entity, year} })
+  return axios.get(`${BASE_URL}/v1/contributions`, { params: {entity, year} }) // Execute API request
     .then((response) => {
-      if (entity !== getState().app.entity) {
+      if (entity !== getState().app.entity) { // If the entity is not equal to the current state's entity, do nothing?
         return
       }
 
-      updateQueryString(entity, year)
+      updateQueryString(entity, year) // Updates the state's request url with a new entity and year
       dispatch({
         type: RECEIVED_CONTRIBUTION_DATA,
         data: response.data.contributions,
@@ -98,10 +112,11 @@ export const updateSelectedEntity = (entity, year) => (dispatch, getState) => {
   return debouncedYearOptionsFetch(dispatch, getState, entity, year)
 }
 
+// Updates the state's request url with a new entity and year
 const updateQueryString = (entity, year) => {
   let newUrl = `?entity=${encodeURIComponent(entity)}`
   newUrl += `&year=${year}`
-  history.replaceState('', '', newUrl)
+  history.replaceState('', '', newUrl) // What are the '' for?
 }
 
 export const updateSelectedYear = (year) => (dispatch, getState) => {
