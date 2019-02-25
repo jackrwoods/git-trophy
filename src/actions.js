@@ -4,7 +4,7 @@
  * @Email:  jackrwoods@gmail.com
  * @Filename: actions.js
  * @Last modified by:   Jack Woods
- * @Last modified time: 2019-02-19T09:48:30-08:00
+ * @Last modified time: 2019-02-21T09:19:23-08:00
  */
 
 import axios from 'axios' // Library for making API requests
@@ -49,43 +49,49 @@ export const loadContributions = (entity, year) => (dispatch, getState) => {
       }
 
       updateQueryString(entity, year) // Updates the state's request url with a new entity and year
-      dispatch({
+      dispatch({ // Dispatch a state change
         type: RECEIVED_CONTRIBUTION_DATA,
         data: response.data.contributions,
         entity: entity,
         year: year
       })
     })
-    .catch(() => {
+    .catch(() => { // If an error occurs
       if (entity !== getState().app.entity) {
         return
       }
 
-      dispatch({type: ERRORED_CONTRIBUTIONS_FETCH})
+      dispatch({type: ERRORED_CONTRIBUTIONS_FETCH}) // Dispatch a state change
     })
 }
 
+// Debouncing eliminates redundant input
+// Why are we debouncing functions?
 const debouncedYearOptionsFetch = debounce((dispatch, getState, entity, year) => {
   if (!entity) {
     return
   }
 
-  dispatch({type: START_YEARS_UPDATE})
+  dispatch({type: START_YEARS_UPDATE}) // State change
+
+  // Make API call
   return axios.get(`${BASE_URL}/v1/years`, { params: {entity} })
+    // The following three lines are repeated a lot. Perhaps API calls should be wrapped in a function?
     .then((response) => {
       if (entity !== getState().app.entity) {
         return
       }
 
       const years = response.data.years
-      dispatch({ type: RECEIVED_YEAR_OPTIONS, years: years })
+      dispatch({ type: RECEIVED_YEAR_OPTIONS, years: years }) // State change
 
       if (!years) {
-        dispatch({type: ERRORED_YEAR_FETCH})
+        dispatch({type: ERRORED_YEAR_FETCH}) // State change
       }
 
       const previousYear = (new Date().getFullYear() - 1).toString()
       let defaultYear
+      // Why test for the existance of year? It's defined as a constant, and its existance is guaranteed by axios...
       if (year && years.includes(year)) {
         defaultYear = year
       } else if (years.includes(previousYear)) {
@@ -93,9 +99,10 @@ const debouncedYearOptionsFetch = debounce((dispatch, getState, entity, year) =>
       } else {
         defaultYear = years[0]
       }
-      dispatch({ type: UPDATE_SELECTED_YEAR, year: defaultYear })
-      loadContributions(entity, defaultYear)(dispatch, getState)
+      dispatch({ type: UPDATE_SELECTED_YEAR, year: defaultYear }) // State change
+      loadContributions(entity, defaultYear)(dispatch, getState) // Only loads contributions for the specified year
     })
+    // This code is also repeated frequently (next 4 lines)
     .catch(() => {
       if (entity !== getState().app.entity) {
         return
@@ -129,6 +136,7 @@ export const updateSelectedYear = (year) => (dispatch, getState) => {
   return loadContributions(entity, year)(dispatch, getState)
 }
 
+// Why wrap this object in a function?
 export const setSceneContainer = (container) => {
   return {type: UPDATE_SCENE_CONTAINER, container}
 }
