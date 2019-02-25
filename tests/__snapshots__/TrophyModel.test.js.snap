@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Can get the base 1`] = `
+<mesh position={Vector3 {
+      "x": 0.3571428571428571,
+      "y": 0,
+      "z": -0.42857142857142855,
+    }
+}>
+  <boxGeometry
+  depth={1}
+  height={0.5}
+  width={1.1428571428571428} />
+  <meshStandardMaterial
+  color={14606046}
+  roughness={0.8}
+  shading={1}
+</mesh>
+`;
