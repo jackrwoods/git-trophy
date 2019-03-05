@@ -2,8 +2,8 @@
  * @Author: Brogan Miner <Brogan>
  * @Date:   2019-02-25T12:02:24-08:00
  * @Email:  brogan.miner@oregonstate.edu
- * @Last modified by:   Jack Woods
- * @Last modified time: 2019-03-04T21:42:03-08:00
+ * @Last modified by:   Brogan
+ * @Last modified time: 2019-03-05T11:18:54-08:00
  */
 
 // For a detailed explanation regarding each configuration property, visit:
@@ -67,7 +67,8 @@ module.exports = {
     'window': {
       location: {
         protocol: 'http',
-        host: 'gittrophy.com'
+        host: 'gittrophy.com',
+        origin: 'http://gittrophy.com'
       }
     }
   },
