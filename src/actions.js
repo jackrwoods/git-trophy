@@ -1,3 +1,12 @@
+/**
+ * @Author: Jack Woods
+ * @Date:   2019-01-15T09:01:50-08:00
+ * @Email:  jackrwoods@gmail.com
+ * @Filename: actions.js
+ * @Last modified by:   Jack Woods
+ * @Last modified time: 2019-02-28T09:05:48-08:00
+ */
+
 import axios from 'axios'
 import debounce from 'debounce'
 import {
