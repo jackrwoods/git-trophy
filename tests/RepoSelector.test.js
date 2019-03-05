@@ -2,8 +2,8 @@
  * @Author: Rachel Sousa <Rachel>
  * @Date:   2019-02-28
  * @Email:  sousar@oregonstate.edu
- * @Last modified by:   Rachel
- * @Last modified time: 2019-03-03
+ * @Last modified by:   Brogan
+ * @Last modified time: 2019-03-05T09:51:52-08:00
  */
 
 import React from 'react' // Import react
@@ -22,7 +22,7 @@ test('Component State Test', () => {
   // Ignore the next line its to hush the linting error, as true always = true
   // eslint-disable-next-line
   const fakeData = new Array(3).fill('2018')
-  const component = mount(
+  const component = shallow(
     <RepoSelector entity='rachel-sousa' updateSelectedEntity={()=>{}} updateSelectedYear={()=>{}} year='2018' yearOptions={fakeData} />
   ).instance()
   expect(component.state.githubEntity === 'DEFAULT_GITHUB_ENTITY') // Assertion Statement
@@ -32,12 +32,15 @@ test('Component State Test', () => {
 test('handleDropdownChange Test', () => {
   // Ignore the next line its to hush the linting error, as true always = true
   // eslint-disable-next-line
-  const fakeData = new Array(3).fill('2018')
+  const fakeData = new Array(3)
+  for (let index in fakeData) {
+    fakeData[index] = {}
+  }
   let num = 0
-  const component = mount(
-    <RepoSelector entity='rachel-sousa' updateSelectedEntity={()=>{}} updateSelectedYear={()=>{num = 1}} year='2018' yearOptions={fakeData} />
+  const component = shallow(
+    <RepoSelector entity='rachel-sousa' updateSelectedEntity={() => {}} updateSelectedYear={function () { this.yearOptions[0] = 1 }} year='2018' yearOptions={fakeData} />
   ).instance()
-  handleDropdownChange()
-  expect(num === 1)
-  //expect(handleEntityChange())
+  component.handleDropdownChange({}, {})
+  expect(component.yearOptions[0] === 1)
+  // expect(handleEntityChange())
 })
