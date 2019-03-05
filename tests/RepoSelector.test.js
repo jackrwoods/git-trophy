@@ -2,7 +2,7 @@
  * @Author: Rachel Sousa <Rachel>
  * @Date:   2019-02-28
  * @Email:  sousar@oregonstate.edu
- * @Last modified by:   Brogan
+ * @Last modified by:   Rachel
  * @Last modified time: 2019-03-05T10:05:12-08:00
  */
 
@@ -38,9 +38,10 @@ test('handleDropdownChange Test', () => {
   }
   let num = 0
   const component = shallow(
-    <RepoSelector entity='rachel-sousa' updateSelectedEntity={() => {}} updateSelectedYear={v => { component.props.year = component.props.yearOptions[v] }} year='2018' yearOptions={fakeData} />
+    <RepoSelector entity='rachel-sousa' updateSelectedEntity={v => { component.setState({ entity: v })}} updateSelectedYear={v => { component.props.yearOptions[0] = component.props.yearOptions[v] }} year='2018' yearOptions={fakeData} />
   ).instance()
-  component.handleDropdownChange({}, { value: 0 })
-  expect(component.props.year[0] === 0)
-  // expect(handleEntityChange())
+  component.handleDropdownChange({}, { value: 1 })
+  expect(component.props.year[0]).toBe('2')
+  component.handleEntityChange({}, { value: 'broha22'} )
+  expect(component.state.entity).toBe('broha22')
 })
