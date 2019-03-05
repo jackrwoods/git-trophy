@@ -2,8 +2,8 @@
  * @Author: Brogan Miner <Brogan>
  * @Date:   2019-02-25T12:02:24-08:00
  * @Email:  brogan.miner@oregonstate.edu
- * @Last modified by:   Brogan
- * @Last modified time: 2019-02-25T13:50:56-08:00
+ * @Last modified by:   Jack Woods
+ * @Last modified time: 2019-03-04T21:42:03-08:00
  */
 
 // For a detailed explanation regarding each configuration property, visit:
@@ -63,7 +63,14 @@ module.exports = {
   // globalTeardown: null,
 
   // A set of global variables that need to be available in all test environments
-  // globals: {},
+  globals: {
+    'window': {
+      location: {
+        protocol: 'http',
+        host: 'gittrophy.com'
+      }
+    }
+  },
 
   // An array of directory names to be searched recursively up from the requiring module's location
   // moduleDirectories: [
@@ -132,7 +139,7 @@ module.exports = {
   // snapshotSerializers: [],
 
   // The test environment that will be used for testing
-  testEnvironment: 'node',
+  testEnvironment: 'jsdom',
 
   // Options that will be passed to the testEnvironment
   // testEnvironmentOptions: {},
@@ -161,7 +168,7 @@ module.exports = {
   // testRunner: "jasmine2",
 
   // This option sets the URL for the jsdom environment. It is reflected in properties such as location.href
-  // testURL: "http://localhost",
+  testURL: "http://gittrophy.com",
 
   // Setting this value to "fake" allows the use of fake timers for functions such as "setTimeout"
   // timers: "real",
