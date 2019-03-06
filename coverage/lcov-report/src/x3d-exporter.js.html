@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/x3d-exporter.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../prettify.css" />
+    <link rel="stylesheet" href="../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../index.html">All files</a> / <a href="index.html">src</a> x3d-exporter.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>0/21</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/8</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/9</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>0/21</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import xmlbuilder from 'xmlbuilder'
+&nbsp;
+function <span class="fstat-no" title="function not covered" >createX3DRoot </span>() {
+<span class="cstat-no" title="statement not covered" >  return xmlbuilder.create('X3D')</span>
+    .att('profile', 'Immersive')
+    .att('xmlns:xsd', 'http://www.w3.org/2001/XMLSchema-instance')
+    .att('xsd:noNamespaceSchemaLocation', 'http://www.web3d.org/specifications/x3d-3.0.xsd')
+}
+&nbsp;
+function <span class="fstat-no" title="function not covered" >exportMaterial </span>(material, tree) {
+<span class="cstat-no" title="statement not covered" >  tree.ele('Appearance')</span>
+    .ele('Material')
+    .att('diffuseColor', material.color.toArray().join(' '))
+}
+&nbsp;
+function <span class="fstat-no" title="function not covered" >exportGeometry </span>(geometry, tree) {
+<span class="cstat-no" title="statement not covered" >  tree.ele('IndexedFaceSet')</span>
+    .att('solid', true)
+    .att('coordIndex', geometry.faces.reduce(<span class="fstat-no" title="function not covered" >(a</span>rr, v) =&gt; {
+<span class="cstat-no" title="statement not covered" >      return arr.concat([v.a, v.b, v.c, -1])</span>
+    }, []).join(' '))
+    .ele('Coordinate')
+    .att('point', geometry.vertices.reduce(<span class="fstat-no" title="function not covered" >(a</span>rr, v) =&gt; {
+<span class="cstat-no" title="statement not covered" >      return arr.concat(v.toArray())</span>
+    }, []).join(' '))
+}
+&nbsp;
+function <span class="fstat-no" title="function not covered" >exportObject </span>(object, tree) {
+<span class="cstat-no" title="statement not covered" >  if (object.type === 'Mesh' || object.type === 'Object3D') {</span>
+<span class="cstat-no" title="statement not covered" >    tree = tree.ele('Transform')</span>
+      .att('translation', object.position.toArray().join(' '))
+      .att('scale', object.scale.toArray().join(' '))
+      .att('rotation', object.quaternion.toArray().join(' '))
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  if (object.type === 'Mesh') {</span>
+<span class="cstat-no" title="statement not covered" >    tree = tree.ele('Group').ele('Shape')</span>
+<span class="cstat-no" title="statement not covered" >    exportMaterial(object.material, tree)</span>
+<span class="cstat-no" title="statement not covered" >    exportGeometry(object.geometry, tree)</span>
+<span class="cstat-no" title="statement not covered" >    tree.up().up()</span>
+  } else <span class="cstat-no" title="statement not covered" >if (object.type === 'Object3D') {</span>
+<span class="cstat-no" title="statement not covered" >    object.children.forEach(<span class="fstat-no" title="function not covered" >(c</span>hild) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >      exportObject(child, tree)</span>
+    })
+  }
+<span class="cstat-no" title="statement not covered" >  tree.up()</span>
+}
+&nbsp;
+function <span class="fstat-no" title="function not covered" >exportSceneX3D </span>(scene) {
+  var tree = <span class="cstat-no" title="statement not covered" >createX3DRoot()</span>
+<span class="cstat-no" title="statement not covered" >  tree = tree.ele('Scene')</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  scene.children.forEach(<span class="fstat-no" title="function not covered" >(c</span>hild) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >    exportObject(child, tree)</span>
+  })
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  return tree.end({pretty: true})</span>
+}
+&nbsp;
+export default exportSceneX3D
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Mar 05 2019 19:50:24 GMT-0800 (Pacific Standard Time)
+</div>
+</div>
+<script src="../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../sorter.js"></script>
+</body>
+</html>
