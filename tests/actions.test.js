@@ -4,7 +4,7 @@
  * @Email:  jackrwoods@gmail.com
  * @Filename: actions.test.js
  * @Last modified by:   Jack Woods
- * @Last modified time: 2019-03-05T09:49:43-08:00
+ * @Last modified time: 2019-03-05T11:57:31-08:00
  */
 
 import axios from 'axios'
@@ -30,7 +30,7 @@ import {
   UPDATE_SCENE_CONTAINER,
   UPDATE_SELECTED_ENTITY,
   UPDATE_SELECTED_YEAR } from '../src/types'
-import{ loadContributions } from '../src/actions.js'
+import { loadContributions, updateSelectedEntity } from '../src/actions.js'
 
 const contributionData = {
   'contributions': [
@@ -77,16 +77,24 @@ const contributionData = {
   ]
 }
 
+const yearsData = {
+  'entity': 'jackrwoods',
+  'years': [
+    '2019',
+    '2018',
+    '2017',
+    '2016'
+  ]
+}
+
 // Tests
-describe('Contributions', () => {
+describe('loadContributions', () => {
   // Mock API data
   axios.get.mockImplementation(() => Promise.resolve({
     data: contributionData
   }))
 
-  const registerChartDownload = jest.fn()
-
-  test('don\'t error erroneously', (done) => {
+  test('doesn\'t error erroneously', (done) => {
     // Initialize mockstore with empty state
     const initialState = {
       app: {
@@ -108,7 +116,7 @@ describe('Contributions', () => {
     })
   })
 
-  test('dispatch the correct data', (done) => {
+  test('dispatches the correct data', (done) => {
     // Initialize mockstore with empty state
     const initialState = {
       app: {
@@ -116,9 +124,6 @@ describe('Contributions', () => {
       }
     }
     const store = mockStore(initialState)
-
-    // loadContributions returns a function that modifies the redux store. Yuck.
-    expect(loadContributions(store.getState().app.entity, 2018)).not.toThrow(store.dispatch, store.getState)
 
     // Call the function to register actions
     loadContributions(store.getState().app.entity, 2018)(store.dispatch, store.getState).then(res => {
@@ -134,5 +139,85 @@ describe('Contributions', () => {
       expect(actions.length).toBe(2)
       done()
     })
+  })
+
+  test('doesn\'t dispatch when entities don\'t match', (done) => {
+    // Initialize mockstore with empty state
+    const initialState = {
+      app: {
+        entity: 'woodjack'
+      }
+    }
+    const store = mockStore(initialState)
+
+    // Call the function to register actions
+    loadContributions('brohaSucks', 2018)(store.dispatch, store.getState).then(res => {
+      // Test if your store dispatched the expected actions
+      const actions = store.getActions()
+      expect(actions).toEqual([{type: START_CONTRIBUTION_UPDATE}])
+      expect(actions.length).toBe(1)
+      done()
+    })
+  })
+})
+
+describe('updateSelectedEntity', () => {
+  test('can change to the same entity', (done) => {
+    // Mock API data
+    axios.get.mockImplementationOnce(() => Promise.resolve({
+      data: yearsData
+    }))
+
+    // Initialize mockstore with empty state
+    const initialState = {
+      app: {
+        entity: 'woodjack'
+      }
+    }
+    const store = mockStore(initialState)
+    const preStore = store.getState()
+    updateSelectedEntity('woodjack', 2018)(store.dispatch, store.getState)
+    setTimeout(() => {
+      expect(store.getActions()[0]).toEqual({ type: UPDATE_SELECTED_ENTITY, entity: 'woodjack' })
+      done()
+    }, 350)
+  })
+  test('can change to a different entity', (done) => {
+    // Mock API data
+    axios.get.mockImplementationOnce(() => Promise.resolve({
+      data: yearsData
+    }))
+
+    // Initialize mockstore with empty state
+    const initialState = {
+      app: {
+        entity: 'woodjack'
+      }
+    }
+    const store = mockStore(initialState)
+    updateSelectedEntity('brohaSucks', 2018)(store.dispatch, store.getState)
+    setTimeout(() => {
+      expect(store.getActions()[0]).toEqual({ type: UPDATE_SELECTED_ENTITY, entity: 'brohasucks' })
+      done()
+    }, 350)
+  })
+  test('can change to a blank entity', (done) => {
+    // Mock API data
+    axios.get.mockImplementationOnce(() => Promise.resolve({
+      data: yearsData
+    }))
+
+    // Initialize mockstore with empty state
+    const initialState = {
+      app: {
+        entity: 'woodjack'
+      }
+    }
+    const store = mockStore(initialState)
+    updateSelectedEntity('', 2018)(store.dispatch, store.getState)
+    setTimeout(() => {
+      expect(store.getActions()[0]).toEqual({ type: UPDATE_SELECTED_ENTITY, entity: '' })
+      done()
+    }, 350)
   })
 })
