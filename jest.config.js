@@ -67,7 +67,8 @@ module.exports = {
     'window': {
       location: {
         protocol: 'http',
-        host: 'gittrophy.com'
+        host: 'gittrophy.com',
+        search: '?entity=woodjack&year=2018'
       }
     }
   },
