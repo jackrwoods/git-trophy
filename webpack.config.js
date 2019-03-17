@@ -1,3 +1,11 @@
+/**
+ * @Author: Brogan Miner <Brogan>
+ * @Date:   2019-03-16T21:12:21-07:00
+ * @Email:  brogan.miner@oregonstate.edu
+ * @Last modified by:   Brogan
+ * @Last modified time: 2019-03-16T21:12:21-07:00
+ */
+
 var webpack = require('webpack');
 var path = require('path');
 var fs = require('fs');
@@ -17,7 +25,7 @@ var config = {
         include : APP_DIR,
         loader : 'babel-loader',
         query: {
-          presets: ['es2015', 'react', 'stage-2']
+          presets: ['@babel/preset-react']
         }
       }
     ]
