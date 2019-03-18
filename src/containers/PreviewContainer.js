@@ -1,3 +1,11 @@
+/**
+ * @Author: Brogan Miner <Brogan>
+ * @Date:   2019-03-17T18:26:26-07:00
+ * @Email:  brogan.miner@oregonstate.edu
+ * @Last modified by:   Brogan
+ * @Last modified time: 2019-03-17T18:27:00-07:00
+ */
+
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Segment, Header, Loader } from 'semantic-ui-react'
@@ -13,7 +21,8 @@ export class PreviewContainer extends React.Component {
     year: PropTypes.string.isRequired,
     loadingContributions: PropTypes.bool,
     setSceneContainer: PropTypes.func.isRequired,
-    loadingModel: PropTypes.bool
+    loadingModel: PropTypes.bool,
+    colors: PropTypes.array.isRequired
   }
 
   constructor (props) {
@@ -61,6 +70,7 @@ export class PreviewContainer extends React.Component {
               data={this.props.data}
               entity={this.props.entity}
               year={this.props.year}
+              colors={this.props.colors}
               width={width - 25}
               height={450}
               ref='preview'
@@ -105,7 +115,8 @@ function mapStateToProps (state) {
     entity: state.app.previewEntity,
     year: state.app.previewYear,
     loadingContributions: state.app.loadingContributions,
-    loadingModel: state.app.loadingModel
+    loadingModel: state.app.loadingModel,
+    colors: state.app.colors
   }
 }
 

@@ -1,3 +1,11 @@
+/**
+ * @Author: Brogan Miner <Brogan>
+ * @Date:   2019-03-17T18:25:27-07:00
+ * @Email:  brogan.miner@oregonstate.edu
+ * @Last modified by:   Brogan
+ * @Last modified time: 2019-03-17T18:25:49-07:00
+ */
+
 import React from 'react'
 import PropTypes from 'prop-types'
 import React3 from 'react-three-renderer'
@@ -13,7 +21,8 @@ export default class Preview extends React.Component {
     height: PropTypes.number.isRequired,
     style: PropTypes.object,
     width: PropTypes.number.isRequired,
-    year: PropTypes.string.isRequired
+    year: PropTypes.string.isRequired,
+    colors: PropTypes.array.isRequired
   }
 
   constructor (props) {
@@ -89,7 +98,8 @@ export default class Preview extends React.Component {
             <TrophyModel
               data={this.props.data}
               entity={this.props.entity}
-              year={this.props.year} />
+              year={this.props.year}
+              colors={this.props.colors} />
           </scene>
         </React3>
       </div>

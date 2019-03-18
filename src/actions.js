@@ -3,8 +3,8 @@
  * @Date:   2019-01-15T09:01:50-08:00
  * @Email:  jackrwoods@gmail.com
  * @Filename: actions.js
- * @Last modified by:   Jack Woods
- * @Last modified time: 2019-03-05T09:41:14-08:00
+ * @Last modified by:   Brogan
+ * @Last modified time: 2019-03-17T18:54:35-07:00
  */
 
 import axios from 'axios'
@@ -22,7 +22,8 @@ import {
   START_YEARS_UPDATE,
   UPDATE_SCENE_CONTAINER,
   UPDATE_SELECTED_ENTITY,
-  UPDATE_SELECTED_YEAR } from './types'
+  UPDATE_SELECTED_YEAR,
+  UPDATE_COLOR } from './types'
 import exportSceneX3D from './x3d-exporter'
 import download from 'downloadjs'
 import authConfig from './oauth'
@@ -99,6 +100,10 @@ const debouncedYearOptionsFetch = debounce((dispatch, getState, entity, year) =>
       dispatch({type: ERRORED_YEAR_FETCH})
     })
 }, 300)
+
+export const updateColor = (color, colors) => (dispatch, getState) => {
+  dispatch({ type: UPDATE_COLOR, color, colors })
+}
 
 export const updateSelectedEntity = (entity, year) => (dispatch, getState) => {
   entity = entity.toLocaleLowerCase()

@@ -1,3 +1,11 @@
+/**
+ * @Author: Brogan Miner <Brogan>
+ * @Date:   2019-03-17T18:15:47-07:00
+ * @Email:  brogan.miner@oregonstate.edu
+ * @Last modified by:   Brogan
+ * @Last modified time: 2019-03-17T18:24:51-07:00
+ */
+
 import React from 'react'
 import PropTypes from 'prop-types'
 import * as THREE from 'three'
@@ -5,13 +13,13 @@ import droidFont from '../../node_modules/three/examples/fonts/droid/droid_sans_
 
 const BASE_COLOR = 0xdedede
 const FONT_COLOR = 0x24292e
-const BAR_COLORS = [
-  0xeeeeee,
-  0xc6e48b,
-  0x7bc96f,
-  0x239a3b,
-  0x195127
-]
+// const BAR_COLORS = [
+//   0xeeeeee,
+//   0xc6e48b,
+//   0x7bc96f,
+//   0x239a3b,
+//   0x195127
+// ]
 const ROUGHNESS = 0.8
 const MAX_BAR_Z = 0.75
 const MIN_BAR_Z = 0.05
@@ -20,7 +28,8 @@ class TrophyModel extends React.Component {
   static propTypes = {
     entity: PropTypes.string.isRequired,
     year: PropTypes.string.isRequired,
-    data: PropTypes.array.isRequired
+    data: PropTypes.array.isRequired,
+    colors: PropTypes.array.isRequired
   }
 
   getBase () {
@@ -93,7 +102,7 @@ class TrophyModel extends React.Component {
             height={height}
             depth={1 / 7} />
           <meshStandardMaterial
-            color={new THREE.Color(BAR_COLORS[day.level])}
+            color={new THREE.Color(this.props.colors[day.level])}
             roughness={ROUGHNESS}
             shading={THREE.FlatShading} />
         </mesh>

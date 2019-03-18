@@ -1,3 +1,11 @@
+/**
+ * @Author: Brogan Miner <Brogan>
+ * @Date:   2019-03-17T18:19:17-07:00
+ * @Email:  brogan.miner@oregonstate.edu
+ * @Last modified by:   Brogan
+ * @Last modified time: 2019-03-17T19:22:11-07:00
+ */
+
 import dummyData from '../data/facebook-react2016.json'
 
 import {
@@ -14,7 +22,8 @@ import {
   START_YEARS_UPDATE,
   UPDATE_SCENE_CONTAINER,
   UPDATE_SELECTED_ENTITY,
-  UPDATE_SELECTED_YEAR } from '../types'
+  UPDATE_SELECTED_YEAR,
+  UPDATE_COLOR } from '../types'
 
 const INITIAL_STATE = {
   container: null,
@@ -29,7 +38,9 @@ const INITIAL_STATE = {
   previewEntity: dummyData.entity,
   previewYear: dummyData.year.toString(),
   year: dummyData.year.toString(),
-  yearOptions: ['2018', '2017', '2016', '2015', '2014', '2013']
+  yearOptions: ['2018', '2017', '2016', '2015', '2014', '2013'],
+  colors: ['#eeeeee', '#b9c7bc', '#84a08b', '#4e7859', '#195127'],
+  color: '#195127'
 }
 
 export default function (state = INITIAL_STATE, action) {
@@ -80,6 +91,12 @@ export default function (state = INITIAL_STATE, action) {
     // UI Updates
     case UPDATE_SELECTED_YEAR:
       return {...state, year: action.year}
+    case UPDATE_COLOR:
+      return {
+        ...state,
+        color: action.color,
+        colors: action.colors
+      }
     case UPDATE_SELECTED_ENTITY:
       return {
         ...state,

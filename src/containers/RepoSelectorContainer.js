@@ -1,3 +1,11 @@
+/**
+ * @Author: Brogan Miner <Brogan>
+ * @Date:   2019-03-17T18:44:47-07:00
+ * @Email:  brogan.miner@oregonstate.edu
+ * @Last modified by:   Brogan
+ * @Last modified time: 2019-03-17T18:46:06-07:00
+ */
+
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
@@ -6,7 +14,8 @@ import {
   exportModel,
   loadContributions,
   updateSelectedEntity,
-  updateSelectedYear } from '../actions'
+  updateSelectedYear,
+  updateColor } from '../actions'
 import RepoSelector from '../components/RepoSelector'
 import ExportPanel from '../components/ExportPanel'
 
@@ -25,7 +34,9 @@ export class RepoSelectorContainer extends React.Component {
     updateSelectedEntity: PropTypes.func.isRequired,
     updateSelectedYear: PropTypes.func.isRequired,
     year: PropTypes.string.isRequired,
-    yearOptions: PropTypes.array.isRequired
+    yearOptions: PropTypes.array.isRequired,
+    color: PropTypes.string.isRequired,
+    updateColor: PropTypes.func.isRequired
   }
 
   constructor (props) {
@@ -53,7 +64,9 @@ export class RepoSelectorContainer extends React.Component {
           year={this.props.year}
           yearOptions={yearOptions}
           loadingYears={this.props.loadingYears}
-          erroredEntity={this.props.erroredEntity} />
+          erroredEntity={this.props.erroredEntity}
+          color={this.props.color}
+          updateColor={this.props.updateColor} />
         <ExportPanel
           onDownloadClick={this.props.downloadModel}
           onExportClick={this.handleExportClick}
@@ -94,7 +107,8 @@ const actions = {
   exportModel,
   loadContributions,
   updateSelectedEntity,
-  updateSelectedYear
+  updateSelectedYear,
+  updateColor
 }
 
 function mapStateToProps (state) {
@@ -107,7 +121,8 @@ function mapStateToProps (state) {
     loadingExport: state.app.loadingExport,
     loadingYears: state.app.loadingYears,
     year: state.app.year,
-    yearOptions: state.app.yearOptions
+    yearOptions: state.app.yearOptions,
+    color: state.app.color
   }
 }
 
