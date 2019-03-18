@@ -3,7 +3,7 @@
  * @Date:   2019-03-17T18:26:26-07:00
  * @Email:  brogan.miner@oregonstate.edu
  * @Last modified by:   Brogan
- * @Last modified time: 2019-03-17T18:27:00-07:00
+ * @Last modified time: 2019-03-17T19:37:07-07:00
  */
 
 import React from 'react'
@@ -22,7 +22,8 @@ export class PreviewContainer extends React.Component {
     loadingContributions: PropTypes.bool,
     setSceneContainer: PropTypes.func.isRequired,
     loadingModel: PropTypes.bool,
-    colors: PropTypes.array.isRequired
+    colors: PropTypes.array.isRequired,
+    error: PropTypes.bool.isRequired
   }
 
   constructor (props) {
@@ -74,7 +75,8 @@ export class PreviewContainer extends React.Component {
               width={width - 25}
               height={450}
               ref='preview'
-              style={this.props.loadingModel ? {opacity: 0} : null} />
+              style={this.props.loadingModel ? {opacity: 0} : null}
+              error={this.props.error} />
           )}
         </ContainerDimensions>
       </Segment>
@@ -116,7 +118,8 @@ function mapStateToProps (state) {
     year: state.app.previewYear,
     loadingContributions: state.app.loadingContributions,
     loadingModel: state.app.loadingModel,
-    colors: state.app.colors
+    colors: state.app.colors,
+    error: state.app.erroredEntity
   }
 }
 

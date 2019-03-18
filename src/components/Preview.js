@@ -3,7 +3,7 @@
  * @Date:   2019-03-17T18:25:27-07:00
  * @Email:  brogan.miner@oregonstate.edu
  * @Last modified by:   Brogan
- * @Last modified time: 2019-03-17T18:25:49-07:00
+ * @Last modified time: 2019-03-17T19:50:59-07:00
  */
 
 import React from 'react'
@@ -22,7 +22,8 @@ export default class Preview extends React.Component {
     style: PropTypes.object,
     width: PropTypes.number.isRequired,
     year: PropTypes.string.isRequired,
-    colors: PropTypes.array.isRequired
+    colors: PropTypes.array.isRequired,
+    error: PropTypes.bool.isRequired
   }
 
   constructor (props) {
@@ -79,8 +80,31 @@ export default class Preview extends React.Component {
 
     const style = this.props.style || {}
     style.cursor = 'move'
-
+    const iconStyle = this.props.style || {}
+    const bgStyle = this.props.style || {}
+    if (this.props.error) {
+      iconStyle.fontSize = '50px'
+      iconStyle.textAlign = 'center'
+      iconStyle.width = '100%'
+      iconStyle.color = 'white'
+      iconStyle.paddingTop = '200px'
+      bgStyle.backgroundColor = 'red'
+      bgStyle.zPosition = 200
+      bgStyle.display = 'block'
+      bgStyle.textAlign = 'center'
+      bgStyle.width = '100%'
+      bgStyle.color = 'white'
+      bgStyle.height = '450px'
+      style.display = 'none'
+    } else {
+      bgStyle.display = 'none'
+    }
     return (
+      <div>
+      <div style={bgStyle}>
+        <i className='fas fa-exclamation-triangle' style={iconStyle} />
+        <br />Invalid Entity Name
+      </div>
       <div style={style} ref='container'>
         <React3 onAnimate={this.onAnimate} antialias mainCamera='maincamera' width={width} height={height} clearColor={0xffffff}>
           <scene ref='scene'>
@@ -102,6 +126,7 @@ export default class Preview extends React.Component {
               colors={this.props.colors} />
           </scene>
         </React3>
+      </div>
       </div>
     )
   }
